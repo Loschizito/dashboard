@@ -1,0 +1,108 @@
+
+> thindesk-dashboard@1.0.0 test
+> node --test --test-reporter=spec tests/*.test.js
+
+▶ Endpoints de chamados
+  ▶ GET /api/v1/chamados
+    ✔ lista com paginação e campos calculados (64.274839ms)
+    ✔ ordena por prioridade (8.779811ms)
+    ✔ busca por protocolo, título ou solicitante ignorando acentos (15.063672ms)
+    ✔ valida paginação e ordenação (7.524884ms)
+  ✔ GET /api/v1/chamados (97.307698ms)
+  ▶ GET /api/v1/chamados/:id
+    ✔ retorna o detalhe com considerações técnicas (16.802043ms)
+    ✔ retorna 404 para chamado inexistente (8.176597ms)
+    ✔ retorna 400 para id inválido (5.817899ms)
+  ✔ GET /api/v1/chamados/:id (32.217427ms)
+  ▶ POST /api/v1/chamados
+    ✔ abre um chamado e devolve 201 com Location (38.604902ms)
+    ✔ valida campos obrigatórios (4.098736ms)
+    ✔ retorna 400 para JSON malformado (7.014777ms)
+  ✔ POST /api/v1/chamados (50.39561ms)
+  ▶ PATCH /api/v1/chamados/:id (fluxo de atendimento)
+    ✔ exige técnico para iniciar o atendimento (8.473325ms)
+    ✔ bloqueia transição inválida (7.077162ms)
+    ✔ inicia o atendimento registrando o primeiro atendimento (7.566511ms)
+    ✔ exige consideração técnica para resolver (11.820187ms)
+    ✔ resolve, fecha com avaliação e depois bloqueia alterações (52.849077ms)
+    ✔ reabre um chamado resolvido limpando a data de resolução (10.168753ms)
+    ✔ valida o corpo da atualização (21.912264ms)
+  ✔ PATCH /api/v1/chamados/:id (fluxo de atendimento) (121.077084ms)
+✔ Endpoints de chamados (325.874473ms)
+▶ Endpoints de sistema e tratamento de dados (RF06/RF07)
+  ✔ GET /saude informa o estado da API (10.320865ms)
+  ✔ GET /qualidade-dados relata registros corrigidos e descartados (4.826368ms)
+  ✔ GET /opcoes-filtro devolve os valores aceitos nos filtros (13.779325ms)
+  ✔ POST /dados/importar trata o lote e atualiza os indicadores (21.410424ms)
+  ✔ POST /dados/importar rejeita corpo que não é lista (6.416999ms)
+  ✔ respostas da API não são cacheadas e permitem CORS (9.609547ms)
+  ✔ rotas inexistentes retornam 404 padronizado (12.388787ms)
+  ✔ serve o dashboard na raiz (13.168151ms)
+✔ Endpoints de sistema e tratamento de dados (RF06/RF07) (100.991213ms)
+▶ Endpoints do dashboard
+  ▶ GET /api/v1/dashboard/indicadores (RF01)
+    ✔ calcula os indicadores gerais sobre toda a base (78.687687ms)
+    ✔ aplica período e devolve comparativo com a janela anterior (15.909923ms)
+    ✔ calcula a variação quando há dados no período anterior (11.554065ms)
+    ✔ combina filtros de tipo e prioridade (10.697708ms)
+  ✔ GET /api/v1/dashboard/indicadores (RF01) (118.690082ms)
+  ▶ GET /api/v1/dashboard/periodo (RF02)
+    ✔ agrupa por dia no fuso de Brasília, preenchendo dias vazios (19.452882ms)
+    ✔ agrupa por semana iniciando na segunda-feira (6.678ms)
+    ✔ agrupa por mês (5.885076ms)
+    ✔ escolhe o agrupamento automaticamente (16.489903ms)
+    ✔ rejeita agrupamento inválido (7.62497ms)
+    ✔ rejeita períodos que gerariam pontos demais (6.927309ms)
+  ✔ GET /api/v1/dashboard/periodo (RF02) (64.816245ms)
+  ▶ GET /api/v1/dashboard/status (RF03)
+    ✔ distribui os chamados por status e prioridade (13.645788ms)
+  ✔ GET /api/v1/dashboard/status (RF03) (14.537664ms)
+  ▶ GET /api/v1/dashboard/tipos (RF04)
+    ✔ ordena os tipos pelos mais atendidos (9.34353ms)
+    ✔ respeita limite e ordenarPor (7.464928ms)
+    ✔ valida o limite (5.293218ms)
+  ✔ GET /api/v1/dashboard/tipos (RF04) (22.737473ms)
+  ▶ GET /api/v1/dashboard/tecnicos
+    ✔ resume o desempenho por técnico (8.797166ms)
+  ✔ GET /api/v1/dashboard/tecnicos (9.094369ms)
+  ▶ Validação de filtros (RF05)
+    ✔ retorna 400 para data em formato errado (7.007145ms)
+    ✔ retorna 400 para data inexistente (3.768517ms)
+    ✔ retorna 400 para início depois do fim (5.993942ms)
+    ✔ retorna 400 para status desconhecido (4.053358ms)
+    ✔ retorna 400 para tipo desconhecido (4.458686ms)
+    ✔ retorna 400 para prioridade desconhecida (5.10238ms)
+    ✔ aceita valores com caixa, acento e rótulo em vez do código (4.405808ms)
+    ✔ filtra por técnico, incluindo "sem_tecnico" (7.991318ms)
+    ✔ filtra por setor normalizado (4.960345ms)
+  ✔ Validação de filtros (RF05) (48.758985ms)
+✔ Endpoints do dashboard (306.384287ms)
+▶ Normalizador (RF07)
+  ✔ corrige caixa, espaços, acentos e rótulos (3.040231ms)
+  ✔ descarta registros com campos essenciais inválidos (0.3946ms)
+  ✔ descarta resolução anterior à abertura (0.496245ms)
+  ✔ ignora avaliação fora da escala e considerações vazias (0.287459ms)
+  ✔ a importação registra a qualidade da carga no banco (9.516265ms)
+✔ Normalizador (RF07) (14.925603ms)
+▶ Banco de dados SQLite
+  ✔ persiste os dados em arquivo entre execuções (64.510211ms)
+  ✔ reimportar o mesmo id substitui o registro e suas considerações (8.12817ms)
+  ✔ as restrições do esquema impedem dados inconsistentes (4.83519ms)
+  ✔ a visão calcula os tempos em horas (3.874458ms)
+✔ Banco de dados SQLite (82.156747ms)
+▶ Datas no fuso de Brasília
+  ✔ interpreta AAAA-MM-DD como dia local (0.375253ms)
+  ✔ calcula início de semana (segunda) e mês (2.213353ms)
+✔ Datas no fuso de Brasília (2.773541ms)
+▶ Gerador da base de exemplo
+  ✔ é determinístico para a mesma semente (14.146717ms)
+  ✔ gera dados consistentes (201.883318ms)
+✔ Gerador da base de exemplo (216.246729ms)
+ℹ tests 62
+ℹ suites 17
+ℹ pass 62
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 611.934233
