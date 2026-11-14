@@ -1,0 +1,28 @@
+Roteiro interativo M1 a M9: execução automatizada
+Data: 14/11/2026, 13:16:10
+Navegador: Chromium 153.0.8010.12 (Playwright), tela 1440x900 e 390x844
+Servidor: npm start (porta 3100), banco data/thindesk.db
+
+Painel carregado: "Atualizado às 13:15:01"
+
+[PASSOU] M1 Atualização automática a cada 60 s (59.9 s)
+         "Atualizado às 13:15:01" -> "Atualizado às 13:16:01" sem interação; 7 requisições à API disparadas
+[PASSOU] M2 Botão "Atualizar" (1.3 s)
+         "Atualizado às 13:16:01" -> "Atualizado às 13:16:02"; 7 requisições à API
+[PASSOU] M3 API fora do ar: aviso e últimos dados preservados (0.4 s)
+         aviso: "Não foi possível conectar à API. Exibindo os últimos dados válidos."; estado: "Falha na atualização às 13:16:02" (data-estado=erro, cor rgb(208, 59, 59)); indicadores mantidos
+[PASSOU] M4 API religada: "Tentar novamente" (0.4 s)
+         aviso oculto; estado: "Atualizado às 13:16:03" (data-estado=ok)
+[PASSOU] M5 Período personalizado (1.0 s)
+         campos De/Até visíveis; intervalo enviado a: dashboard/indicadores, dashboard/periodo, dashboard/status, dashboard/tipos, dashboard/tecnicos, chamados; subtítulo do gráfico: "Abertos pela data de abertura; atendidos pela data de resolução."; URL: ?periodo=personalizado&dataInicio=2026-08-01&dataFim=2026-08-31
+[PASSOU] M6 "Limpar filtros" (1.4 s)
+         período = "Últimos 30 dias", demais filtros vazios, URL: "(sem parâmetros)"
+[PASSOU] M7 Paginação e ordenação da lista (0.8 s)
+         "Página 1 de 19 · 182 chamados" -> "Página 2 de 19 · 182 chamados" -> volta; ordenação "dataAbertura:asc" mudou a 1ª linha para "TD-000472 Teclado com teclas falhando Aline Oliveira · Juríd..."; nenhuma requisição aos endpoints de gráficos
+[PASSOU] M8 Layout em 390 px (celular) (3.3 s)
+         scrollWidth 390 px = largura 390 px (sem rolagem horizontal); 10 blocos alinhados em 1 coluna
+[PASSOU] M9 Detalhe do chamado: clique, Tab + Enter e Esc (0.5 s)
+         clique abriu "Impressora do RH offline"; 1 Tab(s) a partir de "Ordenar" focaram o chamado #9003 (contorno de foco: solid); Enter abriu "Impressora do RH offline" com 2 considerações técnicas; Esc fechou
+
+Erros de JavaScript na página: nenhum
+Resultado: 9 de 9 casos passaram

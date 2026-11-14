@@ -1,0 +1,164 @@
+Evidências de requisições à API Thindesk — 10/11/2026 21:54:14
+
+================================================================
+GET /saude
+----------------------------------------------------------------
+{"dados":{"status":"ok","versao":"1.0.0","uptimeSegundos":186,"banco":"SQLite","totalChamados":652,"dadosAtualizadosEm":"2026-11-11T00:51:18.951Z"}}
+HTTP 200
+
+================================================================
+GET /opcoes-filtro
+----------------------------------------------------------------
+{"dados":{"status":[{"valor":"aberto","rotulo":"Aberto"},{"valor":"em_andamento","rotulo":"Em andamento"},{"valor":"aguardando_usuario","rotulo":"Aguardando usuário"},{"valor":"resolvido","rotulo":"Resolvido"},{"valor":"fechado","rotulo":"Fechado"},{"valor":"cancelado","rotulo":"Cancelado"}],"prioridades":[{"valor":"baixa","rotulo":"Baixa"},{"valor":"media","rotulo":"Média"},{"valor":"alta","rotulo":"Alta"},{"valor":"critica","rotulo":"Crítica"}],"tipos":["Hardware","Software","Rede","Acesso e Senhas","Impressoras","E-mail","Sistema ERP","Telefonia"],"setores":["Financeiro","RH","Comercial","Logística","Jurídico","Diretoria","Atendimento","Produção"],"tecnicos":["Ana Ribeiro","Carlos Mendes","Juliana Costa","Marcos Tavares","Patrícia Lima","Rafael Souza"],"periodoDisponivel":{"dataInicio":"2026-05-23","dataFim":"2026-11-10"}}}
+HTTP 200
+
+================================================================
+GET /dashboard/indicadores?dataInicio=2026-10-12&dataFim=2026-11-10
+----------------------------------------------------------------
+{"dados":{"totalChamados":196,"emAberto":27,"atendidos":162,"cancelados":7,"taxaResolucaoPercentual":85.7,"tempoMedioPrimeiroAtendimentoHoras":5.4,"tempoMedioResolucaoHoras":21.1,"slaCumpridoPercentual":80.2,"satisfacaoMedia":4.1,"totalAvaliacoes":94,"criticosEmAberto":1,"atrasadosEmAberto":18,"semTecnico":12,"comparativo":{"periodoAnterior":{"dataInicio":"2026-09-12","dataFim":"2026-10-11"},"totalChamados":169,"atendidos":158,"tempoMedioResolucaoHoras":28.6,"slaCumpridoPercentual":80.4,"variacaoTotalPercentual":16,"variacaoAtendidosPercentual":2.5}},"meta":{"geradoEm":"2026-11-11T00:54:14.285Z","dadosAtualizadosEm":"2026-11-11T00:51:18.951Z","filtros":{"dataInicio":"2026-10-12","dataFim":"2026-11-10"}}}
+HTTP 200
+
+================================================================
+GET /dashboard/periodo?dataInicio=2026-11-04&dataFim=2026-11-10&agrupamento=dia
+----------------------------------------------------------------
+{"dados":{"agrupamento":"dia","dataInicio":"2026-11-04","dataFim":"2026-11-10","series":[{"periodo":"2026-11-04","rotulo":"04/11","inicio":"2026-11-04","abertos":7,"atendidos":8,"atendidosNoPrazo":7},{"periodo":"2026-11-05","rotulo":"05/11","inicio":"2026-11-05","abertos":6,"atendidos":5,"atendidosNoPrazo":2},{"periodo":"2026-11-06","rotulo":"06/11","inicio":"2026-11-06","abertos":11,"atendidos":8,"atendidosNoPrazo":7},{"periodo":"2026-11-07","rotulo":"07/11","inicio":"2026-11-07","abertos":3,"atendidos":5,"atendidosNoPrazo":4},{"periodo":"2026-11-08","rotulo":"08/11","inicio":"2026-11-08","abertos":4,"atendidos":2,"atendidosNoPrazo":2},{"periodo":"2026-11-09","rotulo":"09/11","inicio":"2026-11-09","abertos":11,"atendidos":3,"atendidosNoPrazo":3},{"periodo":"2026-11-10","rotulo":"10/11","inicio":"2026-11-10","abertos":9,"atendidos":3,"atendidosNoPrazo":1}],"totais":{"abertos":51,"atendidos":34,"atendidosNoPrazo":26}},"meta":{"geradoEm":"2026-11-11T00:54:14.304Z","dadosAtualizadosEm":"2026-11-11T00:51:18.951Z","filtros":{"dataInicio":"2026-11-04","dataFim":"2026-11-10"}}}
+HTTP 200
+
+================================================================
+GET /dashboard/status?tipo=Rede
+----------------------------------------------------------------
+{"dados":{"total":74,"grupos":{"emAberto":6,"atendidos":65,"cancelados":3},"porStatus":[{"status":"aberto","rotulo":"Aberto","quantidade":1,"percentual":1.4},{"status":"em_andamento","rotulo":"Em andamento","quantidade":4,"percentual":5.4},{"status":"aguardando_usuario","rotulo":"Aguardando usuário","quantidade":1,"percentual":1.4},{"status":"resolvido","rotulo":"Resolvido","quantidade":9,"percentual":12.2},{"status":"fechado","rotulo":"Fechado","quantidade":56,"percentual":75.7},{"status":"cancelado","rotulo":"Cancelado","quantidade":3,"percentual":4.1}],"porPrioridade":[{"prioridade":"baixa","rotulo":"Baixa","slaHoras":72,"quantidade":16,"emAberto":2,"atrasados":2},{"prioridade":"media","rotulo":"Média","slaHoras":24,"quantidade":38,"emAberto":4,"atrasados":3},{"prioridade":"alta","rotulo":"Alta","slaHoras":8,"quantidade":14,"emAberto":0,"atrasados":0},{"prioridade":"critica","rotulo":"Crítica","slaHoras":4,"quantidade":6,"emAberto":0,"atrasados":0}]},"meta":{"geradoEm":"2026-11-11T00:54:14.329Z","dadosAtualizadosEm":"2026-11-11T00:51:18.951Z","filtros":{"tipo":["Rede"]}}}
+HTTP 200
+
+================================================================
+GET /dashboard/tipos?limite=3
+----------------------------------------------------------------
+{"dados":[{"posicao":1,"tipo":"Acesso e Senhas","total":152,"atendidos":139,"emAberto":6,"participacaoPercentual":23.7,"tempoMedioResolucaoHoras":27,"slaCumpridoPercentual":82},{"posicao":2,"tipo":"Software","total":116,"atendidos":107,"emAberto":6,"participacaoPercentual":18.2,"tempoMedioResolucaoHoras":27.7,"slaCumpridoPercentual":82.2},{"posicao":3,"tipo":"Sistema ERP","total":75,"atendidos":70,"emAberto":2,"participacaoPercentual":11.9,"tempoMedioResolucaoHoras":27.1,"slaCumpridoPercentual":78.6}],"meta":{"geradoEm":"2026-11-11T00:54:14.348Z","dadosAtualizadosEm":"2026-11-11T00:51:18.951Z","filtros":{},"ordenarPor":"atendidos","limite":3}}
+HTTP 200
+
+================================================================
+GET /dashboard/tecnicos?dataInicio=2026-10-12
+----------------------------------------------------------------
+{"dados":[{"tecnico":"Ana Ribeiro","atendidos":40,"emAndamento":3,"tempoMedioResolucaoHoras":20,"slaCumpridoPercentual":82.5,"satisfacaoMedia":4.08},{"tecnico":"Marcos Tavares","atendidos":30,"emAndamento":1,"tempoMedioResolucaoHoras":17.5,"slaCumpridoPercentual":76.7,"satisfacaoMedia":4.07},{"tecnico":"Juliana Costa","atendidos":28,"emAndamento":4,"tempoMedioResolucaoHoras":17.7,"slaCumpridoPercentual":85.7,"satisfacaoMedia":4},{"tecnico":"Rafael Souza","atendidos":28,"emAndamento":2,"tempoMedioResolucaoHoras":15.3,"slaCumpridoPercentual":82.1,"satisfacaoMedia":4.07},{"tecnico":"Patrícia Lima","atendidos":22,"emAndamento":4,"tempoMedioResolucaoHoras":31.1,"slaCumpridoPercentual":81.8,"satisfacaoMedia":4.15},{"tecnico":"Carlos Mendes","atendidos":14,"emAndamento":1,"tempoMedioResolucaoHoras":35,"slaCumpridoPercentual":64.3,"satisfacaoMedia":4.25}],"meta":{"geradoEm":"2026-11-11T00:54:14.375Z","dadosAtualizadosEm":"2026-11-11T00:51:18.951Z","filtros":{"dataInicio":"2026-10-12"}}}
+HTTP 200
+
+================================================================
+GET /chamados?limite=2&status=em_andamento&ordenarPor=prioridade
+----------------------------------------------------------------
+{"dados":[{"id":637,"protocolo":"TD-000637","titulo":"Criação de usuário para novo colaborador","descricao":"Chamado aberto pelo portal Thindesk.","tipo":"Acesso e Senhas","prioridade":"media","status":"em_andamento","solicitante":"Lucas Martins","setor":"Logística","tecnico":"Juliana Costa","dataAbertura":"2026-11-09T15:25:39.208Z","dataPrimeiroAtendimento":"2026-11-09T18:51:56.081Z","dataResolucao":null,"avaliacao":null,"consideracoesTecnicas":[{"data":"2026-11-09T18:51:56.081Z","tecnico":"Juliana Costa","texto":"Chamado triado e em análise."}],"statusRotulo":"Em andamento","prioridadeRotulo":"Média","prazoSla":"2026-11-10T15:25:39.208Z","slaCumprido":null,"atrasado":true,"tempoPrimeiroAtendimentoHoras":3.4,"tempoResolucaoHoras":null},{"id":636,"protocolo":"TD-000636","titulo":"Lentidão na rede","descricao":"Chamado aberto pelo portal Thindesk.","tipo":"Rede","prioridade":"media","status":"em_andamento","solicitante":"Renata Almeida","setor":"Financeiro","tecnico":"Marcos Tavares","dataAbertura":"2026-11-09T14:17:15.601Z","dataPrimeiroAtendimento":"2026-11-09T19:19:04.528Z","dataResolucao":null,"avaliacao":null,"consideracoesTecnicas":[{"data":"2026-11-09T19:19:04.528Z","tecnico":"Marcos Tavares","texto":"Chamado triado e em análise."}],"statusRotulo":"Em andamento","prioridadeRotulo":"Média","prazoSla":"2026-11-10T14:17:15.601Z","slaCumprido":null,"atrasado":true,"tempoPrimeiroAtendimentoHoras":5,"tempoResolucaoHoras":null}],"paginacao":{"pagina":1,"limite":2,"total":10,"totalPaginas":5},"meta":{"geradoEm":"2026-11-11T00:54:14.400Z","dadosAtualizadosEm":"2026-11-11T00:51:18.951Z","filtros":{"status":["em_andamento"]},"ordenarPor":"prioridade","ordem":"desc"}}
+HTTP 200
+
+================================================================
+GET /qualidade-dados
+----------------------------------------------------------------
+{"dados":{"origem":"POST /api/v1/dados/importar","importadoEm":"2026-11-11T00:51:18.860Z","lidos":2,"validos":1,"corrigidos":1,"descartados":1,"ocorrencias":[{"id":9002,"erros":["dataAbertura inválida: \"amanhã\""]}],"dadosAtualizadosEm":"2026-11-11T00:51:18.951Z"}}
+HTTP 200
+
+================================================================
+POST /dados/importar
+Body: [{"id":9001,"titulo":"Importado do legado","tipo":"TELEFONIA","prioridade":"Crítica","status":"Aberto","solicitante":"Sistema legado","setor":" comercial","dataAbertura":"2026-11-10T13:00:00Z"},{"id":9002,"titulo":"Sem data","tipo":"Rede","prioridade":"media","status":"aberto","dataAbertura":"amanhã"}]
+----------------------------------------------------------------
+{"dados":{"lidos":2,"validos":1,"corrigidos":1,"descartados":1,"ocorrencias":[{"id":9002,"erros":["dataAbertura inválida: \"amanhã\""]}],"dadosAtualizadosEm":"2026-11-11T00:54:14.438Z"}}
+HTTP 200
+
+================================================================
+POST /dados/importar
+Body: {"id":1}
+----------------------------------------------------------------
+{"erro":{"status":400,"codigo":"PARAMETRO_INVALIDO","mensagem":"Envie um array JSON com 1 a 5000 chamados."}}
+HTTP 400
+
+================================================================
+POST /chamados
+Body: {"titulo":"Impressora do RH offline","tipo":"impressoras","prioridade":"alta","solicitante":"Larissa Rocha","setor":"rh"}
+----------------------------------------------------------------
+Location: /api/v1/chamados/9003
+{"dados":{"id":9003,"protocolo":"TD-009003","titulo":"Impressora do RH offline","descricao":null,"tipo":"Impressoras","prioridade":"alta","status":"aberto","solicitante":"Larissa Rocha","setor":"RH","tecnico":null,"dataAbertura":"2026-11-11T00:54:14.470Z","dataPrimeiroAtendimento":null,"dataResolucao":null,"avaliacao":null,"consideracoesTecnicas":[],"statusRotulo":"Aberto","prioridadeRotulo":"Alta","prazoSla":"2026-11-11T08:54:14.470Z","slaCumprido":null,"atrasado":false,"tempoPrimeiroAtendimentoHoras":null,"tempoResolucaoHoras":null}}
+HTTP 201
+
+================================================================
+PATCH /chamados/9003
+Body: {"status":"em_andamento"}
+----------------------------------------------------------------
+{"erro":{"status":422,"codigo":"REGRA_DE_NEGOCIO","mensagem":"É necessário atribuir um técnico para este status.","detalhes":[{"campo":"tecnico"}]}}
+HTTP 422
+
+================================================================
+PATCH /chamados/9003
+Body: {"status":"em_andamento","tecnico":"Ana Ribeiro","consideracao":"Impressora sem IP; verificando DHCP."}
+----------------------------------------------------------------
+{"dados":{"id":9003,"protocolo":"TD-009003","titulo":"Impressora do RH offline","descricao":null,"tipo":"Impressoras","prioridade":"alta","status":"em_andamento","solicitante":"Larissa Rocha","setor":"RH","tecnico":"Ana Ribeiro","dataAbertura":"2026-11-11T00:54:14.470Z","dataPrimeiroAtendimento":"2026-11-11T00:54:14.541Z","dataResolucao":null,"avaliacao":null,"consideracoesTecnicas":[{"data":"2026-11-11T00:54:14.541Z","tecnico":"Ana Ribeiro","texto":"Impressora sem IP; verificando DHCP."}],"statusRotulo":"Em andamento","prioridadeRotulo":"Alta","prazoSla":"2026-11-11T08:54:14.470Z","slaCumprido":null,"atrasado":false,"tempoPrimeiroAtendimentoHoras":0,"tempoResolucaoHoras":null}}
+HTTP 200
+
+================================================================
+PATCH /chamados/9003
+Body: {"status":"resolvido"}
+----------------------------------------------------------------
+{"erro":{"status":422,"codigo":"REGRA_DE_NEGOCIO","mensagem":"Informe a consideração técnica da solução ao resolver o chamado.","detalhes":[{"campo":"consideracao"}]}}
+HTTP 422
+
+================================================================
+PATCH /chamados/9003
+Body: {"status":"resolvido","consideracao":"Reserva de IP criada no DHCP e fila recriada."}
+----------------------------------------------------------------
+{"dados":{"id":9003,"protocolo":"TD-009003","titulo":"Impressora do RH offline","descricao":null,"tipo":"Impressoras","prioridade":"alta","status":"resolvido","solicitante":"Larissa Rocha","setor":"RH","tecnico":"Ana Ribeiro","dataAbertura":"2026-11-11T00:54:14.470Z","dataPrimeiroAtendimento":"2026-11-11T00:54:14.541Z","dataResolucao":"2026-11-11T00:54:14.582Z","avaliacao":null,"consideracoesTecnicas":[{"data":"2026-11-11T00:54:14.541Z","tecnico":"Ana Ribeiro","texto":"Impressora sem IP; verificando DHCP."},{"data":"2026-11-11T00:54:14.582Z","tecnico":"Ana Ribeiro","texto":"Reserva de IP criada no DHCP e fila recriada."}],"statusRotulo":"Resolvido","prioridadeRotulo":"Alta","prazoSla":"2026-11-11T08:54:14.470Z","slaCumprido":true,"atrasado":false,"tempoPrimeiroAtendimentoHoras":0,"tempoResolucaoHoras":0}}
+HTTP 200
+
+================================================================
+PATCH /chamados/9003
+Body: {"status":"fechado","avaliacao":5}
+----------------------------------------------------------------
+{"dados":{"id":9003,"protocolo":"TD-009003","titulo":"Impressora do RH offline","descricao":null,"tipo":"Impressoras","prioridade":"alta","status":"fechado","solicitante":"Larissa Rocha","setor":"RH","tecnico":"Ana Ribeiro","dataAbertura":"2026-11-11T00:54:14.470Z","dataPrimeiroAtendimento":"2026-11-11T00:54:14.541Z","dataResolucao":"2026-11-11T00:54:14.582Z","avaliacao":5,"consideracoesTecnicas":[{"data":"2026-11-11T00:54:14.541Z","tecnico":"Ana Ribeiro","texto":"Impressora sem IP; verificando DHCP."},{"data":"2026-11-11T00:54:14.582Z","tecnico":"Ana Ribeiro","texto":"Reserva de IP criada no DHCP e fila recriada."}],"statusRotulo":"Fechado","prioridadeRotulo":"Alta","prazoSla":"2026-11-11T08:54:14.470Z","slaCumprido":true,"atrasado":false,"tempoPrimeiroAtendimentoHoras":0,"tempoResolucaoHoras":0}}
+HTTP 200
+
+================================================================
+PATCH /chamados/9003
+Body: {"consideracao":"tentativa após fechamento"}
+----------------------------------------------------------------
+{"erro":{"status":422,"codigo":"REGRA_DE_NEGOCIO","mensagem":"Chamado fechado não pode ser alterado.","detalhes":[{"campo":"status","valor":"fechado"}]}}
+HTTP 422
+
+================================================================
+GET /dashboard/indicadores?dataInicio=2026-11-10&dataFim=2026-11-01&status=pendente
+----------------------------------------------------------------
+{"erro":{"status":400,"codigo":"PARAMETRO_INVALIDO","mensagem":"Um ou mais parâmetros são inválidos.","detalhes":[{"campo":"dataInicio","valor":"2026-11-10","mensagem":"dataInicio deve ser anterior ou igual a dataFim."},{"campo":"status","valor":"pendente","mensagem":"Valor não reconhecido para \"status\"."}]}}
+HTTP 400
+
+================================================================
+GET /dashboard/periodo?agrupamento=ano
+----------------------------------------------------------------
+{"erro":{"status":400,"codigo":"PARAMETRO_INVALIDO","mensagem":"Um ou mais parâmetros são inválidos.","detalhes":[{"campo":"agrupamento","valor":"ano","mensagem":"Valores aceitos: auto, dia, semana, mes."}]}}
+HTTP 400
+
+================================================================
+GET /chamados/99999
+----------------------------------------------------------------
+{"erro":{"status":404,"codigo":"NAO_ENCONTRADO","mensagem":"Chamado 99999 não encontrado."}}
+HTTP 404
+
+================================================================
+GET /chamados/abc
+----------------------------------------------------------------
+{"erro":{"status":400,"codigo":"PARAMETRO_INVALIDO","mensagem":"Um ou mais parâmetros são inválidos.","detalhes":[{"campo":"id","valor":"abc","mensagem":"O id deve ser um inteiro positivo."}]}}
+HTTP 400
+
+================================================================
+POST /chamados
+Body: {"titulo":"x"}
+----------------------------------------------------------------
+{"erro":{"status":400,"codigo":"PARAMETRO_INVALIDO","mensagem":"Um ou mais parâmetros são inválidos.","detalhes":[{"campo":"titulo","mensagem":"Deve ter entre 3 e 120 caracteres."},{"campo":"solicitante","mensagem":"Campo obrigatório."},{"campo":"tipo","mensagem":"Tipo obrigatório e deve ser um dos tipos cadastrados (GET /api/v1/opcoes-filtro)."}]}}
+HTTP 400
+
+================================================================
+POST /chamados
+Body: {"titulo": 
+----------------------------------------------------------------
+{"erro":{"status":400,"codigo":"JSON_INVALIDO","mensagem":"O corpo da requisição não é um JSON válido."}}
+HTTP 400
+
+================================================================
+GET /rota-inexistente
+----------------------------------------------------------------
+{"erro":{"status":404,"codigo":"ROTA_NAO_ENCONTRADA","mensagem":"Rota GET /api/v1/rota-inexistente não existe."}}
+HTTP 404
+

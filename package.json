@@ -1,0 +1,20 @@
+{
+  "name": "thindesk-dashboard",
+  "version": "1.0.0",
+  "description": "Dashboard administrativo e API de indicadores do sistema de chamados Thindesk",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "seed": "node scripts/seed.js",
+    "test": "node --test --test-reporter=spec tests/*.test.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^13.0.3",
+    "express": "^4.21.2"
+  }
+}
