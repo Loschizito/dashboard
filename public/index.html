@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thindesk · Painel de Chamados</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%232a78d6'/><path d='M9 10h14M16 10v13' stroke='white' stroke-width='3.5' stroke-linecap='round'/></svg>">
+  <link rel="stylesheet" href="css/estilo.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js" defer></script>
+  <script src="js/api.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+  <header class="topo">
+    <div class="marca">
+      <span class="logo" aria-hidden="true">T</span>
+      <div>
+        <h1>Painel de Chamados</h1>
+        <p class="subtitulo">Thindesk · Suporte técnico</p>
+      </div>
+    </div>
+    <div class="acoes-topo">
+      <span id="estado-conexao" class="estado" role="status" aria-live="polite">Carregando…</span>
+      <label class="alternador" title="Atualiza os dados a cada 60 segundos">
+        <input type="checkbox" id="auto-atualizar" checked>
+        <span>Auto (60s)</span>
+      </label>
+      <button type="button" id="btn-atualizar" class="botao">Atualizar</button>
+      <button type="button" id="btn-tema" class="botao botao-icone" aria-label="Alternar tema claro/escuro" title="Alternar tema">◐</button>
+    </div>
+  </header>
+
+  <main class="conteudo">
+    <div id="aviso-erro" class="aviso aviso-erro" role="alert" hidden>
+      <span id="aviso-erro-texto"></span>
+      <button type="button" class="botao" id="btn-tentar-novamente">Tentar novamente</button>
+    </div>
+
+    <!-- RF05 — Filtros -->
+    <form id="filtros" class="filtros" aria-label="Filtros de consulta">
+      <label class="campo">
+        <span>Período</span>
+        <select name="periodo" id="f-periodo">
+          <option value="7">Últimos 7 dias</option>
+          <option value="30" selected>Últimos 30 dias</option>
+          <option value="90">Últimos 90 dias</option>
+          <option value="180">Últimos 180 dias</option>
+          <option value="todos">Todo o período</option>
+          <option value="personalizado">Personalizado…</option>
+        </select>
+      </label>
+      <label class="campo campo-data" hidden>
+        <span>De</span>
+        <input type="date" name="dataInicio" id="f-inicio">
+      </label>
+      <label class="campo campo-data" hidden>
+        <span>Até</span>
+        <input type="date" name="dataFim" id="f-fim">
+      </label>
+      <label class="campo">
+        <span>Status</span>
+        <select name="status" id="f-status"><option value="">Todos</option></select>
+      </label>
+      <label class="campo">
+        <span>Tipo</span>
+        <select name="tipo" id="f-tipo"><option value="">Todos</option></select>
+      </label>
+      <label class="campo">
+        <span>Prioridade</span>
+        <select name="prioridade" id="f-prioridade"><option value="">Todas</option></select>
+      </label>
+      <label class="campo">
+        <span>Técnico</span>
+        <select name="tecnico" id="f-tecnico"><option value="">Todos</option><option value="sem_tecnico">Sem técnico</option></select>
+      </label>
+      <label class="campo">
+        <span>Setor</span>
+        <select name="setor" id="f-setor"><option value="">Todos</option></select>
+      </label>
+      <label class="campo campo-busca">
+        <span>Busca</span>
+        <input type="search" name="busca" id="f-busca" placeholder="Protocolo, título ou solicitante" maxlength="100">
+      </label>
+      <button type="reset" class="botao botao-link" id="btn-limpar">Limpar filtros</button>
+    </form>
+
+    <!-- RF01 — Indicadores -->
+    <section aria-labelledby="t-indicadores">
+      <h2 id="t-indicadores" class="sr-only">Indicadores gerais</h2>
+      <div class="kpis" id="kpis">
+        <article class="kpi" data-kpi="total"><h3>Chamados abertos no período</h3><p class="kpi-valor">–</p><p class="kpi-nota"></p></article>
+        <article class="kpi" data-kpi="emAberto"><h3>Em aberto (backlog)</h3><p class="kpi-valor">–</p><p class="kpi-nota"></p></article>
+        <article class="kpi" data-kpi="atendidos"><h3>Atendidos</h3><p class="kpi-valor">–</p><p class="kpi-nota"></p></article>
+        <article class="kpi" data-kpi="tempo"><h3>Tempo médio de resolução</h3><p class="kpi-valor">–</p><p class="kpi-nota"></p></article>
+        <article class="kpi" data-kpi="sla"><h3>Resolvidos no prazo (SLA)</h3><p class="kpi-valor">–</p><p class="kpi-nota"></p></article>
+        <article class="kpi" data-kpi="satisfacao"><h3>Satisfação média</h3><p class="kpi-valor">–</p><p class="kpi-nota"></p></article>
+      </div>
+      <div class="alertas" id="alertas"></div>
+    </section>
+
+    <div class="grade">
+      <!-- RF02 — Análise por período -->
+      <section class="painel painel-largo" aria-labelledby="t-periodo">
+        <header class="painel-topo">
+          <div>
+            <h2 id="t-periodo">Chamados abertos × atendidos</h2>
+            <p class="painel-sub" id="periodo-sub">Abertos pela data de abertura; atendidos pela data de resolução.</p>
+          </div>
+          <div class="segmentado" role="group" aria-label="Agrupamento" id="agrupamento">
+            <button type="button" data-valor="auto" aria-pressed="true">Auto</button>
+            <button type="button" data-valor="dia" aria-pressed="false">Dia</button>
+            <button type="button" data-valor="semana" aria-pressed="false">Semana</button>
+            <button type="button" data-valor="mes" aria-pressed="false">Mês</button>
+          </div>
+        </header>
+        <div class="legenda" id="legenda-periodo"></div>
+        <div class="grafico grafico-alto"><canvas id="g-periodo" role="img" aria-label="Gráfico de linhas de chamados abertos e atendidos por período"></canvas></div>
+        <details class="tabela-dados">
+          <summary>Ver dados em tabela</summary>
+          <div class="tabela-rolagem"><table id="tab-periodo"></table></div>
+        </details>
+      </section>
+
+      <!-- RF03 — Situação -->
+      <section class="painel" aria-labelledby="t-status">
+        <header class="painel-topo">
+          <div>
+            <h2 id="t-status">Situação dos chamados</h2>
+            <p class="painel-sub">Quantidade por status no recorte filtrado</p>
+          </div>
+        </header>
+        <div class="barra-grupos" id="barra-grupos" aria-hidden="true"></div>
+        <div class="legenda" id="legenda-grupos"></div>
+        <div class="grafico"><canvas id="g-status" role="img" aria-label="Gráfico de barras com a quantidade de chamados por status"></canvas></div>
+      </section>
+
+      <!-- RF04 — Tipos -->
+      <section class="painel" aria-labelledby="t-tipos">
+        <header class="painel-topo">
+          <div>
+            <h2 id="t-tipos">Tipos de chamado mais atendidos</h2>
+            <p class="painel-sub">Ranking por chamados resolvidos/fechados</p>
+          </div>
+        </header>
+        <div class="grafico"><canvas id="g-tipos" role="img" aria-label="Ranking de tipos de chamado mais atendidos"></canvas></div>
+        <details class="tabela-dados">
+          <summary>Ver detalhes por tipo</summary>
+          <div class="tabela-rolagem"><table id="tab-tipos"></table></div>
+        </details>
+      </section>
+
+      <section class="painel" aria-labelledby="t-prioridades">
+        <header class="painel-topo">
+          <div>
+            <h2 id="t-prioridades">Backlog por prioridade</h2>
+            <p class="painel-sub">Em aberto e atrasados em relação ao SLA</p>
+          </div>
+        </header>
+        <div class="tabela-rolagem"><table id="tab-prioridades" class="tabela"></table></div>
+      </section>
+
+      <section class="painel" aria-labelledby="t-tecnicos">
+        <header class="painel-topo">
+          <div>
+            <h2 id="t-tecnicos">Desempenho da equipe</h2>
+            <p class="painel-sub">Por técnico responsável</p>
+          </div>
+        </header>
+        <div class="tabela-rolagem"><table id="tab-tecnicos" class="tabela"></table></div>
+      </section>
+
+      <section class="painel painel-largo" aria-labelledby="t-chamados">
+        <header class="painel-topo">
+          <div>
+            <h2 id="t-chamados">Chamados</h2>
+            <p class="painel-sub" id="chamados-sub">Clique em um chamado para ver as considerações técnicas</p>
+          </div>
+          <label class="campo campo-inline">
+            <span>Ordenar</span>
+            <select id="ordenacao">
+              <option value="dataAbertura:desc">Mais recentes</option>
+              <option value="dataAbertura:asc">Mais antigos</option>
+              <option value="prioridade:desc">Maior prioridade</option>
+              <option value="status:asc">Status</option>
+            </select>
+          </label>
+        </header>
+        <div class="tabela-rolagem"><table id="tab-chamados" class="tabela tabela-clicavel"></table></div>
+        <nav class="paginacao" aria-label="Paginação">
+          <button type="button" class="botao" id="pag-anterior">Anterior</button>
+          <span id="pag-info"></span>
+          <button type="button" class="botao" id="pag-proxima">Próxima</button>
+        </nav>
+      </section>
+    </div>
+
+    <footer class="rodape" id="rodape"></footer>
+  </main>
+
+  <dialog id="detalhe" aria-labelledby="detalhe-titulo">
+    <form method="dialog" class="detalhe-fechar"><button class="botao botao-icone" aria-label="Fechar">✕</button></form>
+    <div id="detalhe-conteudo"></div>
+  </dialog>
+
+</body>
+</html>
